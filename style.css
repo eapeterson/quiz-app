@@ -1,0 +1,30 @@
+body {
+  color: white;
+  background-color: #003B6F;
+  text-align: center;
+}
+
+/*h1, h2, a {
+  font//NEED TO FIGURE THIS OUT
+}*/
+
+.choice {
+  background-color: black;
+  height: 100px;
+  width: 100px;
+  margin: 100px;
+  -moz-border-radius:50px;
+  -webkit-border-radius:50px;
+}
+
+ul{
+  list-style-type: none;
+}
+
+.tardis {
+  padding-right: 300px;
+  margin-right: 200px;
+}
+#questionBox, #answerBox {
+  margin-top: 20px;
+}
