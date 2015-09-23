@@ -6,6 +6,8 @@ $(document).ready(function(){
 
 	//$(".answer")
 
+	$("#graphic").attr('src', 'images/River_Looks_Left.jpg')
+
 	$(".tardis").css('opacity', 0.5);//change with every question correct
 
 	var hq { 
