@@ -13,8 +13,14 @@ body {
   height: 100px;
   width: 100px;
   margin: 100px;
-  -moz-border-radius:50px;
-  -webkit-border-radius:50px;
+  -webkit-border-radius:50%;
+  padding: 20px;
+}
+
+.riverSong, .kNine {
+  padding-top: 30px;
+  border-color: ghostwhite;
+  border-width: 5em;
 }
 
 ul{
@@ -24,7 +30,9 @@ ul{
 .tardis {
   padding-right: 300px;
   margin-right: 200px;
+  opacity: 0.2;
 }
+
 #questionBox, #answerBox {
   margin-top: 20px;
 }
