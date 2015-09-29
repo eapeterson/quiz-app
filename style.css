@@ -1,15 +1,24 @@
 body {
   color: white;
-  background-color: #003B6F;
   text-align: center;
+  background-image: url("images/space.jpg");
 }
 
 /*h1, h2, a {
   font//NEED TO FIGURE THIS OUT
 }*/
 
+.choiceHero, .choiceVillain {
+  background-color: #003B6F;
+  height: 100px;
+  width: 100px;
+  margin: 100px;
+  -webkit-border-radius:50%;
+  padding: 20px;
+  cursor: pointer;
+}
 
-.choice {
+.submitAnswer {
   background-color: black;
   height: 100px;
   width: 100px;
@@ -19,9 +28,15 @@ body {
   cursor: pointer;
 }
 
-.graphic {
-  background-image: url('../images/River_Looks_Left.jpg');
+.questionBox {
+  background-color: #003B6F;
+  width: 400px;
+  padding-left: 200px;
+  padding-right: 200px;
+  margin-left: 250px;
+  margin-right: 250px;
 }
+
 
 /*.riverSong, .kNine {
   padding-top: 30px;
