@@ -8,6 +8,7 @@ body {
   font//NEED TO FIGURE THIS OUT
 }*/
 
+
 .choice {
   background-color: black;
   height: 100px;
@@ -15,16 +16,26 @@ body {
   margin: 100px;
   -webkit-border-radius:50%;
   padding: 20px;
+  cursor: pointer;
 }
 
-.riverSong, .kNine {
+.graphic {
+  background-image: url('../images/River_Looks_Left.jpg');
+}
+
+/*.riverSong, .kNine {
   padding-top: 30px;
   border-color: ghostwhite;
   border-width: 5em;
+}*/
+
+ul {
+  list-style-type: none;
+  cursor: pointer;
 }
 
-ul{
-  list-style-type: none;
+label, input {
+  cursor: pointer;
 }
 
 .tardis {

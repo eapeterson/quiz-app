@@ -14,33 +14,60 @@
 	<body>
 		<header>
   			<h1>How well do you know Doctor Who?</h1>
-  			<h2>Pick a quiz!</h2>
-  			<a class="choice">Hero Quiz</a>
-  			<a class="choice">Villain Quiz</a>
+  			<a class="openOverlay">Allons-Y!</a>
 		</header>
 
-		<div id="graphic">
+		<!---Pops up when you click Allons-Y!-->	
+		<div class="overlay" id="pickOne">
+				<div class="pickOne">
+					<div>
+						<h2>Pick a quiz!</h2>
+  						<a class="choiceHero">Hero Quiz</a>
+  						<a class="choiceVillain">Villain Quiz</a>
+					</div>
+				</div>
+			</div>
+
+		<div id="graphic" class="graphic">
 			
 		</div>
 		
-
-		<div id="questionBox">
-  			<span id="question">Question #1 of 5: Who is this character?</span>
+		<br>
+		<div id="questionBox" class="questionBox">
+  			<h3><span id="question">Question #1 of 5: Who is this character?</span></h3>
   			<br>
   			<div id="answerBox">
-    			<ul class="">
+    			<ul class="answers">
     				<li>
-				      <label for="opt0">
-				      <input id="opt0" type="radio" class="answer" name="opt">
-				      <span>The Master</span></li>
-				    <li><input type="radio" class="answer">
-				      <span>Rose Tyler</span></li>
-				    <li><input type="radio" class="answer">
-				      <span>Clara Oswald</span></li>
-				    <li><input type="radio" class="answer">
-				      <span>River Song</span></li>
+				      	<label for="opt0">
+				      	<input id="opt0" type="radio" class="answer" name="opt">
+				      	<span>The Master</span>
+				    </li>
+				    <li>
+				    	<label for="opt1">
+				   	  	<input id="opt1" type="radio" class="answer" name="opt">
+				      	<span>Rose Tyler</span>
+				    </li>
+				    <li>
+						<label for="opt2">
+				    	<input id="opt2" type="radio" class="answer" name="opt">
+				      	<span>Clara Oswald</span>
+				    </li>
+				    <li>
+				    	<label for="opt3">
+				    	<input id="opt3" type="radio" class="answer" name="opt">
+				      	<span>River Song</span>
+				    </li>
 				</ul>
   			</div>
+  			<br>
+  			<div id="submitAnswer">
+  				<a id="submitAnswer" class="choice">SUBMIT</a>
+  			</div>
+
+  			<br>
+
+  			<h2 id="result" class="result"></h2>
   
   			<img class= "tardis" src="http://i.imgur.com/D1MC7MSt.jpg">
   		</div>
