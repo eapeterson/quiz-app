@@ -10,12 +10,11 @@ $(document).ready(function(){
   		//begin Hero quiz
   	});
 
-  	$("choiceVillain").click(function(){
+  	$(".choiceVillain").click(function(){
   		$(".overlay").fadeOut(1000);
   		//begin Villain quiz
   	});
 
-	$(".tardis").css('opacity', 0.5);//change with every question correct
 
 	//starting variables
 	var currentQuestion = 0;
@@ -58,21 +57,20 @@ $(document).ready(function(){
 
 	console.log(heroQuestions[3]);
 
-	function moveQuestion () {
+	//This function needs serious help!
+	function nextQuestion () {
+		for (i=0, i<data.heroQuestions.length; i++) {
+			heroQuestions [i][0]=data.heroQuestions[i].question;
+			heroQuestions [i][1]=data.heroQuestions[i].answers;
+			heroQuestions [i][2]=data.heroQuestions[i].answers;
+			heroQuestions [i][3]=data.heroQuestions[i].answers;
+			heroQuestions [i][4]=data.heroQuestions[i].answers;
+		)}
 		$("#questionBox").next('span').text(heroQuestions[0].answers[0].picture[0]);
 
 	}
 
-	$('#question').html(heroQuestions[0]);
-
-	$('#submitAnswer').on("click", function () {
-		moveQuestion();
-		tardisFade();
-		currentQuestion++;
-		//$('#question').html(heroQuestions.next())
-	});
-
-	$(".tardis").css('opacity', 0.5);//change with every question correct
+	$(".tardis").css('opacity', 0.1);//change with every question correct
 
 	function tardisFade() {
         var answer = $("input[type='radio']:checked").val();
@@ -80,13 +78,13 @@ $(document).ready(function(){
             score++;    
         }
         if (score == 1) {
-            $(".tardis").css('opacity', 0.5);
+            $(".tardis").css('opacity', 0.3);
         }
         else if (score == 2) {
-            $(".tardis").css('opacity', 0.7);
+            $(".tardis").css('opacity', 0.5);
         }
         else if (score == 3) {
-            $(".tardis").css('opacity', 0.8);
+            $(".tardis").css('opacity', 0.7);
         }
         else if (score == 4) {
            $(".tardis").css('opacity', 0.9);
@@ -95,6 +93,19 @@ $(document).ready(function(){
             $(".tardis").css('opacity', 1.0);
         }
     }
+
+	$('#question').html(heroQuestions[0]);
+
+	$('#submitAnswer').on("click", function () {
+		nextQuestion();
+		tardisFade();
+		currentQuestion++;
+		//$('#question').html(heroQuestions.next())
+	});
+
+	
+
+	
 
 	//$("#question").text(hq[0].q);
 	//$("#opt0").next('span').text(hq[0].o[0]);

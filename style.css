@@ -2,11 +2,10 @@ body {
   color: white;
   text-align: center;
   background-image: url("images/space.jpg");
+  background-size: 100%, 100%;
+  background-repeat: no-repeat;
+  font-family: 'Orbitron', sans-serif;
 }
-
-/*h1, h2, a {
-  font//NEED TO FIGURE THIS OUT
-}*/
 
 .choiceHero, .choiceVillain {
   background-color: #003B6F;
@@ -16,6 +15,10 @@ body {
   -webkit-border-radius:50%;
   padding: 20px;
   cursor: pointer;
+}
+
+.choiceHero:hover, .choiceVillain:hover {
+  background-color: lightsteelblue;
 }
 
 .submitAnswer {
@@ -28,28 +31,30 @@ body {
   cursor: pointer;
 }
 
-.questionBox {
-  background-color: #003B6F;
-  width: 400px;
-  padding-left: 200px;
-  padding-right: 200px;
-  margin-left: 250px;
-  margin-right: 250px;
+.submitAnswer:hover {
+  background-color: darkgray;
 }
 
-
-/*.riverSong, .kNine {
+.questionBox {
+  background-color: #003B6F;
+  width: 500px;
+  padding-left: 200px;
+  padding-right: 200px;
   padding-top: 30px;
-  border-color: ghostwhite;
-  border-width: 5em;
-}*/
+  margin-left: 200px;
+  margin-right: 200px;
+}
+
+#questionBox, #answerBox {
+  margin-top: 20px;
+}
 
 ul {
   list-style-type: none;
   cursor: pointer;
 }
 
-label, input {
+label, input, .openOverlay {
   cursor: pointer;
 }
 
@@ -59,6 +64,4 @@ label, input {
   opacity: 0.2;
 }
 
-#questionBox, #answerBox {
-  margin-top: 20px;
-}
+
