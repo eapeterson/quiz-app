@@ -19,8 +19,10 @@ $(document).ready(function(){
 	//starting variables
 	var currentQuestion = 0;
 	var score = 0;
+	var currentQuiz= "heroQuestions";
 
-	var heroQuestions = [{
+	var quizzes = {
+	heroQuestions: [{
         question: "Question #1 of 5: Who is this character?",
         answers: ["The Master", "Rose Tyler", "Clara Oswald", "River Song"],
         correctAnswer : 3,
@@ -53,30 +55,19 @@ $(document).ready(function(){
         answers: ["Amy Pond", "The Face of Bo", "Danny Pink", "Rory Williams"],
         correctAnswer : 3,
         picture: "images/pandorica.jpg"
-    }];
-
-	console.log(heroQuestions[3]);
-
-	//This function needs serious help!
-	function nextQuestion () {
-		for (i=0, i<data.heroQuestions.length; i++) {
-			heroQuestions [i][0]=data.heroQuestions[i].question;
-			heroQuestions [i][1]=data.heroQuestions[i].answers;
-			heroQuestions [i][2]=data.heroQuestions[i].answers;
-			heroQuestions [i][3]=data.heroQuestions[i].answers;
-			heroQuestions [i][4]=data.heroQuestions[i].answers;
-		)}
-		$("#questionBox").next('span').text(heroQuestions[0].answers[0].picture[0]);
-
-	}
+    }],
+    villainQuestions: [{}]
+	}	
 
 	$(".tardis").css('opacity', 0.1);//change with every question correct
 
 	function tardisFade() {
         var answer = $("input[type='radio']:checked").val();
-        if (answer == heroQuestions[currentQuestion].correctAnswer) {
+        var c = quizzes[currentQuiz][currentQuestion].correctAnswer;
+        if (answer == quizzes[currentQuiz][currentQuestion].answers[c]) {
             score++;    
         }
+        
         if (score == 1) {
             $(".tardis").css('opacity', 0.3);
         }
@@ -94,20 +85,43 @@ $(document).ready(function(){
         }
     }
 
-	$('#question').html(heroQuestions[0]);
-
 	$('#submitAnswer').on("click", function () {
-		nextQuestion();
-		tardisFade();
+		console.log ("Answer submitted")
 		currentQuestion++;
-		//$('#question').html(heroQuestions.next())
+		tardisFade();
+		
+		//if statement to make sure there's a question(use heroQuestions.length)watch for last question not showing
+		//}
+		questionBuilder();
+		if (currentQuestion = 1) {
+			$("#result").hide();
+		}
+		else {
+			$("#result").show();
+		}
+		showResults();
+		console.log (currentQuestion);
+		console.log (score);
 	});
 
-	
+	//function showing results(need html)
+	function showResults () {
+		var answer = $("input[type='radio']:checked").val();
+        var c = quizzes[currentQuiz][currentQuestion].correctAnswer;
+		if (answer === quizzes[currentQuiz][currentQuestion].answers[c]) {  
+            $("#result").html("Correct! You must like your fish fingers and custard!");  
+        }
+		else if (answer != quizzes[currentQuiz][currentQuestion].answers[c]) {
+        	$("#result").html("Incorrect. What are you, a Dalek!?");
+        }
+	}
 
-	
-
-	//$("#question").text(hq[0].q);
-	//$("#opt0").next('span').text(hq[0].o[0]);
-
+	function questionBuilder () {
+		$('#question').html(quizzes[currentQuiz][currentQuestion].question);
+		for (var i=0; i< quizzes[currentQuiz][currentQuestion].answers.length; i++) {
+			$("#opt"+i).next("span").html(quizzes[currentQuiz][currentQuestion].answers[i]);
+		};
+		
+	}
+	questionBuilder();
 });
