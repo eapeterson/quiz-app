@@ -21,6 +21,16 @@ body {
   background-color: lightsteelblue;
 }
 
+#graphic {
+  width: 75px;
+  height: 85px;
+  padding-left: 200px;
+  padding-right: 200px;
+  padding-top: 30px;
+  margin-left: 200px;
+  margin-right: 200px;
+}
+
 .submitAnswer {
   background-color: black;
   height: 100px;
@@ -61,7 +71,7 @@ label, input, .openOverlay {
 .tardis {
   padding-right: 300px;
   margin-right: 200px;
-  opacity: 0.2;
+  opacity: 0;
 }
 
 

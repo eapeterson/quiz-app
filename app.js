@@ -23,17 +23,17 @@ $(document).ready(function(){
 
 	var quizzes = {
 	heroQuestions: [{
-        question: "Question #1 of 5: Who is this character?",
+        question: "Question #1 of 5: Who married the Doctor?",
         answers: ["The Master", "Rose Tyler", "Clara Oswald", "River Song"],
         correctAnswer : 3,
-        picture: "images/River_Looks_Left.jpg"//'http://i.imgur.com/tIl2Gsst.jpg'
+        picture: "images/River_Looks_Left.jpg"//'http://i.imgur.com/tIl2Gsst.jpg'//
         },
 
         {
         question: "Question #2 of 5: What does TARDIS stand for?",
         answers: ["The Actual Returning Device In Skaro", "Time And Relative Dimension In Space", "Time Around Running Distance In Space", "Traveling And Returning Device In Space"],
         correctAnswer : 1,
-        picture: "images/tardis.jpg"
+        picture: "../images/tardis.jpg"
         },
 
         {
@@ -56,7 +56,40 @@ $(document).ready(function(){
         correctAnswer : 3,
         picture: "images/pandorica.jpg"
     }],
-    villainQuestions: [{}]
+    villainQuestions: [{
+    	/*question: "Question #1 of 5: Who created the Daleks?",
+        answers: ["Winston Churchill", "The Master", "Davros", "The Cybermen"],
+        correctAnswer : 2,
+        picture: "images/daleks.jpg"
+        },
+
+        {
+        question: "Question #2 of 5: What is the Weeping Angels' weakness?",
+        answers: ["Fire", "Being watched", "Water", "Gamma radiation"],
+        correctAnswer : 1,
+        picture: "../images/"
+        },
+
+        {
+        question: "Question #3 of 5: ",
+        answers: ["", "", "", ""],
+        correctAnswer : 2,
+        picture: "images/pandorica.jpg"
+        },
+
+        {
+        question: "Question #4 of 5: Which of these people NEVER had a crush on the Doctor?",
+        answers: ["Donna Noble", "Amy Pond", "Martha Jones", "Jack Harkness"],
+        correctAnswer : 0,
+        picture: "images/heartbeat.jpg"
+        },
+
+        {
+        question: "Question #5 of 5: Which character protected someone for 2000 years?",
+        answers: ["Amy Pond", "The Face of Bo", "Danny Pink", "Rory Williams"],
+        correctAnswer : 3,
+        picture: "images/pandorica.jpg"*/
+    }]
 	}	
 
 	$(".tardis").css('opacity', 0.1);//change with every question correct
@@ -65,7 +98,7 @@ $(document).ready(function(){
         var answer = $("input[type='radio']:checked").val();
         var c = quizzes[currentQuiz][currentQuestion].correctAnswer;
         if (answer == quizzes[currentQuiz][currentQuestion].answers[c]) {
-            score++;    
+            score ++;    
         }
         
         if (score == 1) {
@@ -87,13 +120,12 @@ $(document).ready(function(){
 
 	$('#submitAnswer').on("click", function () {
 		console.log ("Answer submitted")
+		$("input:radio").prop('checked', false);
 		currentQuestion++;
 		tardisFade();
 		
-		//if statement to make sure there's a question(use heroQuestions.length)watch for last question not showing
-		//}
 		questionBuilder();
-		if (currentQuestion = 1) {
+		if (currentQuestion >= 1) {
 			$("#result").hide();
 		}
 		else {
@@ -124,4 +156,12 @@ $(document).ready(function(){
 		
 	}
 	questionBuilder();
+
+	/*function pictureBuilder () {
+		$('#graphic').(quizzes[currentQuiz][currentQuestion].picture);
+		for (var i=0; i< quizzes[currentQuiz][currentQuestion].picture; i++) {
+			$("#graphic"+i).next("span").html(quizzes[currentQuiz][currentQuestion].picture[i]);
+		};
+	}
+	pictureBuilder();*/
 });
