@@ -67,34 +67,35 @@ $(document).ready(function(){
         question: "Question #2 of 5: What is the Weeping Angels' weakness?",
         answers: ["Fire", "Being watched", "Water", "Gamma radiation"],
         correctAnswer : 1,
-        picture: "../images/"
+        picture: "images/weepingangels.jpg"
         },
 
         {
-        question: "Question #3 of 5: ",
-        answers: ["", "", "", ""],
-        correctAnswer : 2,
-        picture: "images/pandorica.jpg"
-        },
-
-        {
-        question: "Question #4 of 5: Which of these people NEVER had a crush on the Doctor?",
-        answers: ["Donna Noble", "Amy Pond", "Martha Jones", "Jack Harkness"],
+        question: "Question #3 of 5: Which enemies of The Doctor wish to "upgrade" everyone ",
+        answers: ["The Cybermen", "The Daleks", "The Silence", "The Vashta Nerada"],
         correctAnswer : 0,
-        picture: "images/heartbeat.jpg"
+        picture: "images/enemies.jpg"
         },
 
         {
-        question: "Question #5 of 5: Which character protected someone for 2000 years?",
-        answers: ["Amy Pond", "The Face of Bo", "Danny Pink", "Rory Williams"],
+        question: "Question #4 of 5: Which of these is not the name of one of The Doctor's adversaries?",
+        answers: ["Kandy Man", "The Family Slitheen", "The Sontarens", "The Beebles"],
         correctAnswer : 3,
-        picture: "images/pandorica.jpg"*/
+        picture: "images/doctor.jpg"
+        },
+
+        {
+        question: "Question #5 of 5: The Silurians are natives of what planet?",
+        answers: ["Skaro", "Mars", "Gallifrey", "Earth"],
+        correctAnswer : 3,
+        picture: "images/silurian.jpg"*/
     }]
 	}	
 
 	$(".tardis").css('opacity', 0.1);//change with every question correct
 
 	function tardisFade() {
+		var score = 0;
         var answer = $("input[type='radio']:checked").val();
         var c = quizzes[currentQuiz][currentQuestion].correctAnswer;
         if (answer == quizzes[currentQuiz][currentQuestion].answers[c]) {
@@ -119,19 +120,12 @@ $(document).ready(function(){
     }
 
 	$('#submitAnswer').on("click", function () {
-		console.log ("Answer submitted")
 		$("input:radio").prop('checked', false);
 		currentQuestion++;
-		tardisFade();
-		
+		tardisFade(); //---not working
 		questionBuilder();
-		if (currentQuestion >= 1) {
-			$("#result").hide();
-		}
-		else {
-			$("#result").show();
-		}
 		showResults();
+		console.log ("Answer submitted");
 		console.log (currentQuestion);
 		console.log (score);
 	});
@@ -140,13 +134,21 @@ $(document).ready(function(){
 	function showResults () {
 		var answer = $("input[type='radio']:checked").val();
         var c = quizzes[currentQuiz][currentQuestion].correctAnswer;
-		if (answer === quizzes[currentQuiz][currentQuestion].answers[c]) {  
+        if (currentQuestion >= 1) {
+			$("#result").hide();
+		}
+		else {
+			$("#result").show();
+		};
+		if (answer == quizzes[currentQuiz][currentQuestion].answers[c]) {  
             $("#result").html("Correct! You must like your fish fingers and custard!");  
         }
 		else if (answer != quizzes[currentQuiz][currentQuestion].answers[c]) {
         	$("#result").html("Incorrect. What are you, a Dalek!?");
-        }
-	}
+        };
+        
+	};
+
 
 	function questionBuilder () {
 		$('#question').html(quizzes[currentQuiz][currentQuestion].question);
@@ -154,7 +156,7 @@ $(document).ready(function(){
 			$("#opt"+i).next("span").html(quizzes[currentQuiz][currentQuestion].answers[i]);
 		};
 		
-	}
+	};
 	questionBuilder();
 
 	/*function pictureBuilder () {
