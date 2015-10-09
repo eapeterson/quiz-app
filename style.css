@@ -52,6 +52,9 @@ body {
   padding-top: 30px;
   margin-left: 200px;
   margin-right: 200px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  border-radius: 20px;
 }
 
 #questionBox, #answerBox {

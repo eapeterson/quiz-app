@@ -153,6 +153,7 @@ $(document).ready(function(){
         $(".tardis").css('opacity', 0.1);
         questionBuilder();
         pictureBuilder();
+        $("#answers").show();
     }
 
 	$('#submitAnswer').on("click", function () {
