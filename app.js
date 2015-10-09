@@ -1,46 +1,61 @@
 $(document).ready(function(){
 
-
-	$(".openOverlay").click(function(){
-    	$(".overlay").fadeIn(1000);
-  	});
-
-  	$(".choiceHero").click(function(){
-  		$(".overlay").fadeOut(1000);
-  		//begin Hero quiz
-  	});
-
-  	$(".choiceVillain").click(function(){
-  		$(".overlay").fadeOut(1000);
-  		//begin Villain quiz
-  	});
-
-
 	//starting variables
 	var currentQuestion = 0;
 	var score = 0;
 	var currentQuiz= "heroQuestions";
 
+    $("#questionBox").hide();
+
+	$(".openOverlay").click(function(){
+    	$(".overlay").fadeIn(1000);
+        $("#questionBox").hide();
+        
+  	});
+
+  	$(".choiceHero").click(function(){
+  		$(".overlay").fadeOut(1000);
+        $("#questionBox").show();
+  		currentQuiz = "heroQuestions";
+        resetQuiz();
+
+        console.log(currentQuiz);
+        console.log(currentQuestion);
+        
+  		//begin Hero quiz
+  	});
+
+  	$(".choiceVillain").click(function(){
+  		$(".overlay").fadeOut(1000);
+        $("#questionBox").show();
+        currentQuiz = "villainQuestions";
+        resetQuiz();
+        
+        console.log(currentQuiz);
+        console.log(currentQuestion);
+  		//begin Villain quiz
+  	});
+	
 	var quizzes = {
 	heroQuestions: [{
-        question: "Question #1 of 5: Who married the Doctor?",
+        question: "Question #1 of 5: Who is pictured above?",
         answers: ["The Master", "Rose Tyler", "Clara Oswald", "River Song"],
         correctAnswer : 3,
-        picture: "images/River_Looks_Left.jpg"//'http://i.imgur.com/tIl2Gsst.jpg'//
+        picture: "images/River_Looks_Left.jpg"
         },
 
         {
         question: "Question #2 of 5: What does TARDIS stand for?",
         answers: ["The Actual Returning Device In Skaro", "Time And Relative Dimension In Space", "Time Around Running Distance In Space", "Traveling And Returning Device In Space"],
         correctAnswer : 1,
-        picture: "../images/tardis.jpg"
+        picture: "images/flyingtardis.jpg"
         },
 
         {
         question: "Question #3 of 5: What planet is the Doctor from?",
         answers: ["Second Earth", "Cheem", "Gallifrey", "Skaro"],
         correctAnswer : 2,
-        picture: "images/pandorica.jpg"
+        picture: "images/Gallifrey.jpg"
         },
 
         {
@@ -57,7 +72,7 @@ $(document).ready(function(){
         picture: "images/pandorica.jpg"
     }],
     villainQuestions: [{
-    	/*question: "Question #1 of 5: Who created the Daleks?",
+    	question: "Question #1 of 5: Who created the Daleks?",
         answers: ["Winston Churchill", "The Master", "Davros", "The Cybermen"],
         correctAnswer : 2,
         picture: "images/daleks.jpg"
@@ -71,7 +86,7 @@ $(document).ready(function(){
         },
 
         {
-        question: "Question #3 of 5: Which enemies of The Doctor wish to "upgrade" everyone ",
+        question: "Question #3 of 5: Which enemies of The Doctor wish to upgrade everyone?",
         answers: ["The Cybermen", "The Daleks", "The Silence", "The Vashta Nerada"],
         correctAnswer : 0,
         picture: "images/enemies.jpg"
@@ -88,20 +103,24 @@ $(document).ready(function(){
         question: "Question #5 of 5: The Silurians are natives of what planet?",
         answers: ["Skaro", "Mars", "Gallifrey", "Earth"],
         correctAnswer : 3,
-        picture: "images/silurian.jpg"*/
+        picture: "images/silurian.jpg"
     }]
-	}	
+	};	
+
+	function isCorrect () {
+		var bool = false;
+        var answer = $("input[type='radio']:checked").next("span").text();
+        var c = quizzes[currentQuiz][currentQuestion].correctAnswer;
+        if (answer == quizzes[currentQuiz][currentQuestion].answers[c]) {
+            bool = true;   
+        }
+        return bool;        
+	};
 
 	$(".tardis").css('opacity', 0.1);//change with every question correct
 
 	function tardisFade() {
-		var score = 0;
-        var answer = $("input[type='radio']:checked").val();
-        var c = quizzes[currentQuiz][currentQuestion].correctAnswer;
-        if (answer == quizzes[currentQuiz][currentQuestion].answers[c]) {
-            score ++;    
-        }
-        
+		        
         if (score == 1) {
             $(".tardis").css('opacity', 0.3);
         }
@@ -117,36 +136,56 @@ $(document).ready(function(){
         else if (score == 5) {
             $(".tardis").css('opacity', 1.0);
         }
+    };
+
+    function clearBox () {
+        $("#question").empty();
+        $("#graphic").empty();
+        $("#answerBox").empty();
+        $("#submitAnswer").hide();
+    };
+
+    function resetQuiz () {
+        currentQuestion = 0
+        score = 0;
+        $("#result").empty();
+        $("#submitAnswer").show();
+        $(".tardis").css('opacity', 0.1);
+        questionBuilder();
+        pictureBuilder();
     }
 
 	$('#submitAnswer').on("click", function () {
+        var percent = (score/5) * 100 + 20;
+		var correct = isCorrect();
+		adjustScore(correct);
+		tardisFade(); //---not working
 		$("input:radio").prop('checked', false);
 		currentQuestion++;
-		tardisFade(); //---not working
-		questionBuilder();
-		showResults();
-		console.log ("Answer submitted");
-		console.log (currentQuestion);
-		console.log (score);
+        if (quizzes[currentQuiz].length != currentQuestion) {
+    		questionBuilder();
+    		pictureBuilder();
+    		showResults(correct); 
+        }
+        else {
+            clearBox();
+            $("#result").html("Congratulations, you got " + percent + " % correct! Ready to try again? Click Allons-Y!");
+        }
 	});
 
-	//function showing results(need html)
-	function showResults () {
-		var answer = $("input[type='radio']:checked").val();
-        var c = quizzes[currentQuiz][currentQuestion].correctAnswer;
-        if (currentQuestion >= 1) {
-			$("#result").hide();
+	function adjustScore (b) {
+		if (b) {
+			score++;
+		}
+	}
+	function showResults (b) {
+		
+		if (b) {
+			 $("#result").html("Correct! You must like your fish fingers and custard!");
 		}
 		else {
-			$("#result").show();
-		};
-		if (answer == quizzes[currentQuiz][currentQuestion].answers[c]) {  
-            $("#result").html("Correct! You must like your fish fingers and custard!");  
-        }
-		else if (answer != quizzes[currentQuiz][currentQuestion].answers[c]) {
-        	$("#result").html("Incorrect. What are you, a Dalek!?");
-        };
-        
+			$("#result").html("Incorrect. What are you, a Dalek!?");
+		}        
 	};
 
 
@@ -159,11 +198,10 @@ $(document).ready(function(){
 	};
 	questionBuilder();
 
-	/*function pictureBuilder () {
-		$('#graphic').(quizzes[currentQuiz][currentQuestion].picture);
-		for (var i=0; i< quizzes[currentQuiz][currentQuestion].picture; i++) {
-			$("#graphic"+i).next("span").html(quizzes[currentQuiz][currentQuestion].picture[i]);
-		};
+	function pictureBuilder () {
+		$('#graphic img').attr("src", quizzes[currentQuiz][currentQuestion].picture);
 	}
-	pictureBuilder();*/
+	pictureBuilder();
+
+
 });

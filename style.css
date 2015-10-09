@@ -21,14 +21,13 @@ body {
   background-color: lightsteelblue;
 }
 
-#graphic {
-  width: 75px;
-  height: 85px;
-  padding-left: 200px;
-  padding-right: 200px;
+#graphic img {
+  width: 275px;
+  height: 175px;
+  padding-left: 100px;
+  padding-right: 100px;
   padding-top: 30px;
-  margin-left: 200px;
-  margin-right: 200px;
+  align-content: center;
 }
 
 .submitAnswer {
@@ -59,9 +58,10 @@ body {
   margin-top: 20px;
 }
 
-ul {
+ul.answers {
   list-style-type: none;
   cursor: pointer;
+  padding: 0;
 }
 
 label, input, .openOverlay {
