@@ -18,10 +18,6 @@ $(document).ready(function(){
         $("#questionBox").show();
   		currentQuiz = "heroQuestions";
         resetQuiz();
-
-        console.log(currentQuiz);
-        console.log(currentQuestion);
-        
   		//begin Hero quiz
   	});
 
@@ -30,9 +26,6 @@ $(document).ready(function(){
         $("#questionBox").show();
         currentQuiz = "villainQuestions";
         resetQuiz();
-        
-        console.log(currentQuiz);
-        console.log(currentQuestion);
   		//begin Villain quiz
   	});
 	
@@ -117,7 +110,7 @@ $(document).ready(function(){
         return bool;        
 	};
 
-	$(".tardis").css('opacity', 0.1);//change with every question correct
+	$(".tardis").css('opacity', 0.1);
 
 	function tardisFade() {
 		        
@@ -139,9 +132,9 @@ $(document).ready(function(){
     };
 
     function clearBox () {
-        $("#question").empty();
-        $("#graphic").empty();
-        $("#answerBox").empty();
+        $("#question").val('');
+        $("#graphic").val('');
+        $("#answerBox").val('');
         $("#submitAnswer").hide();
     };
 
@@ -157,10 +150,10 @@ $(document).ready(function(){
     }
 
 	$('#submitAnswer').on("click", function () {
-        var percent = (score/5) * 100 + 20;
+        var percent = ((score+1)/5) * 100;
 		var correct = isCorrect();
 		adjustScore(correct);
-		tardisFade(); //---not working
+		tardisFade(); 
 		$("input:radio").prop('checked', false);
 		currentQuestion++;
         if (quizzes[currentQuiz].length != currentQuestion) {
